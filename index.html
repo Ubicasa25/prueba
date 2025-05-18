@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ubicasa | Villa Ángela</title>
+  <meta name="description" content="Descubre propiedades en Villa Ángela, Chaco. Alquileres, ventas y terrenos. Contáctanos para publicar tu propiedad." />
+  <meta name="keywords" content="alquiler Villa Ángela, casas en venta Villa Ángela, propiedades premium Villa Ángela, inmobiliaria de lujo" />
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Ubicasa25/img/hogar-pestaña2.webp" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    .parallax {
+      background-size: cover;
+      background-position: center;
+    }
+    @media (min-width: 768px) {
+      .parallax {
+        background-attachment: fixed;
+      }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+    .animate-bounce {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+    #featuredProperties {
+      scroll-margin-top: 80px;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    h1, h2, h3, h4, .font-playfair {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Añadir sombra al texto para mejor contraste */
+    .text-shadow-subtle {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-inter">
+
+<!-- Hero Section with Integrated Search -->
+<header class="parallax relative min-h-[40vh] sm:min-h-[70vh] flex items-start justify-center text-center text-white" style="background-image: url('https://cdn.jsdelivr.net/gh/Ubicasa25/img/banner.webp'); background-size: cover; background-position: center;">
+  <div class="absolute inset-0 bg-black opacity-60"></div>
+  <div class="relative z-10 animate-fade-in px-4 sm:px-6 w-full max-w-6xl pt-2 sm:pt-12">
+    <h1 class="flex items-center justify-center text-white drop-shadow-md font-[Baloo_2]">
+      <img src="https://cdn.jsdelivr.net/gh/Ubicasa25/img/logo-ubicasa.webp" alt="Ubicasa" class="h-24 sm:h-32 md:h-40 lg:h-52 xl:h-64 mx-auto" />
+    </h1>
+ <!-- Slogan -->
+    <p class="mt-6 sm:mt-8 text-base sm:text-xl font-montserrat font-semibold text-white opacity-90 text-center text-shadow-subtle">
+      Encontrá tu propiedad ideal
+    </p>
+    <!-- Integrated Search Bar (Wider) -->
+    <div class="mt-4 sm:mt-8 bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-4xl sm:max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 md:grid-cols-4">
+        <input id="searchInput" type="text"
+          placeholder="Buscar..."
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat" />
+        
+        <select id="operationFilter"
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat">
+          <option value="">¿Qué estás buscando?</option>
+          <option value="alquilar">Quiero alquilar</option>
+          <option value="comprar">Quiero comprar</option>        
+        </select>
+
+        <select id="typeFilter"
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat">
+          <option value="">Tipo de propiedad</option>
+          <option value="casa">Casa</option>
+          <option value="departamento">Departamento</option>
+          <option value="terreno">Terreno</option>
+          <option value="local">Local</option>
+          <option value="oficina">Oficina</option>
+          <option value="campo">Campo</option>
+        </select>
+
+        <select id="sortPrice"
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat">
+          <option value="">Ordenar resultados</option>
+          <option value="asc">De menor a mayor precio</option>
+          <option value="desc">De mayor a menor precio</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-4 sm:mt-6 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+      <a href="#featuredProperties" class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-3 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:from-indigo-700 hover:to-purple-800 transition duration-300 font-montserrat">
+        Explorar propiedades
+      </a>
+      <a href="https://wa.me/+543644539325?text=Hola,%20quiero%20publicar%20una%20propiedad%20en%20Ubicasa" target="_blank" class="bg-green-500 text-white px-3 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-green-600 transition duration-200 font-montserrat">
+        Publicar ahora
+      </a>
+    </div>
+
+   
+  </div>
+</header>
+
+<!-- Propiedades Destacadas -->
+<section class="py-12 px-4 bg-gray-900">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center mb-8 animate-fade-in text-white text-shadow-subtle">Propiedades destacadas</h2>
+    <div id="featuredProperties" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</section>
+
+<!-- Todas las Propiedades -->
+<section class="py-12 px-4 bg-gray-800">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center mb-8 animate-fade-in text-white text-shadow-subtle">Explorá todas las propiedades</h2>
+    <div id="propertiesContainer" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</section>
+
+<div id="propertyModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-50">
+  <div class="bg-gray-900 text-white rounded-2xl p-6 w-full max-w-lg sm:max-w-2xl md:max-w-3xl max-h-[90vh] overflow-y-auto modal-content relative">
+    <button onclick="closePropertyModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">×</button>
+    <h3 id="modalTitle" class="text-xl sm:text-3xl font-montserrat font-semibold mb-4 text-center text-shadow-subtle"></h3>
+
+    <!-- Carrusel de Fotos Mejorado -->
+    <div class="mb-6 relative">
+      <div id="imageContainer" class="w-full h-64 sm:h-80 rounded-lg overflow-hidden">
+        <img src="" alt="Propiedad" class="w-full h-full object-cover" id="mainImage">
+      </div>
+      <div class="flex justify-center gap-2 mt-4 overflow-x-auto pb-2" id="thumbnailContainer"></div>
+      <button onclick="prevImage()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 sm:p-3 rounded-full hover:bg-gray-700">←</button>
+      <button onclick="nextImage()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 sm:p-3 rounded-full hover:bg-gray-700">→</button>
+    </div>
+
+    <!-- Detalles -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+      <div>
+        <p id="modalPrice" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">💰</span></p>
+        <p id="modalType" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">🏠</span></p>
+        <p id="modalOperation" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">📝</span></p>
+      </div>
+      <div>
+        <p id="modalLocation" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">📍</span></p>
+        <p id="modalSquareMeters" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">📏</span></p>
+      </div>
+      <div>
+        <p id="modalBedrooms" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">🛏️</span></p>
+        <p id="modalBathrooms" class="text-sm sm:text-lg flex items-center font-montserrat"><span class="mr-2 text-xl">🛁</span></p>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-6">
+      <h4 class="text-base sm:text-xl font-montserrat font-semibold mb-2">Descripción</h4>
+      <p id="modalDescription" class="text-gray-300 text-sm sm:text-lg font-montserrat"></p>
+    </div>
+
+    <!-- Contacto -->
+    <div class="border-t border-gray-700 pt-4">
+      <h4 class="text-base sm:text-xl font-montserrat font-semibold mb-2">Contactá al propietario</h4>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <p id="modalOwner" class="text-sm sm:text-lg font-montserrat font-medium"></p>
+          <p id="modalPhone" class="text-sm sm:text-lg font-montserrat"></p>
+        </div>
+        <a id="modalWhatsApp" href="#" target="_blank" class="inline-block bg-green-500 text-white px-6 py-3 rounded-lg font-semibold text-sm sm:text-lg hover:bg-green-600 transition duration-300 w-full sm:w-auto text-center font-montserrat">Contactar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-950 py-8 px-4">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 gap-6 text-center sm:text-left sm:grid-cols-3">
+    <!-- Descripción -->
+    <div>
+      <h3 class="text-lg sm:text-2xl font-montserrat font-semibold mb-4 text-white text-shadow-subtle">Ubicasa</h3>
+      <p class="text-gray-400 text-sm sm:text-base font-inter">Propiedades en Villa Ángela - Chaco. Encuentra o publica ahora.</p>
+    </div>
+    <!-- Contacto -->
+    <div>
+      <h3 class="text-lg sm:text-2xl font-montserrat font-semibold mb-4 text-white text-shadow-subtle">Contáctanos</h3>
+      <p class="text-gray-400 text-sm sm:text-base font-inter mb-2">¿Querés publicar una propiedad?</p>
+      <a href="https://wa.me/+543644539325?text=Hola,%20quiero%20publicar%20una%20propiedad%20en%20Ubicasa" target="_blank" class="inline-flex items-center text-green-400 hover:text-green-300 text-sm sm:text-base font-inter">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/whatsapp.svg" alt="WhatsApp" class="w-5 h-5 mr-2 invert" />
+        Quiero publicar
+      </a>
+    </div>
+    <!-- Redes Sociales -->
+    <div>
+      <h3 class="text-lg sm:text-2xl font-montserrat font-semibold mb-4 text-white text-shadow-subtle">Seguinos</h3>
+      <div class="flex justify-center sm:justify-start space-x-4">
+        <a href="https://www.instagram.com/" target="_blank" class="hover:scale-110 transition-transform">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/instagram.svg" alt="Instagram" class="w-6 h-6 invert opacity-70 hover:opacity-100" />
+        </a>
+        <a href="https://twitter.com/" target="_blank" class="hover:scale-110 transition-transform">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/x.svg" alt="X (Twitter)" class="w-6 h-6 invert opacity-70 hover:opacity-100" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aviso legal -->
+  <div class="max-w-4xl mx-auto mt-6 text-center text-gray-500 text-sm sm:text-base font-inter">
+    <p>Ubicasa es una plataforma digital para la publicación de propiedades en Villa Ángela, Chaco. No realiza intermediación inmobiliaria ni cobra comisiones por operaciones. Las negociaciones son responsabilidad exclusiva de las partes intervinientes.</p>
+  </div>
+
+  <p class="text-center text-gray-500 mt-4 text-sm sm:text-base font-inter">© 2025 Ubicasa - Diseñado y desarrollado por Hostara.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
