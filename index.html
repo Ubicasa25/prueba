@@ -54,7 +54,6 @@
     .font-inter {
       font-family: 'Inter', sans-serif;
     }
-    /* Añadir sombra al texto para mejor contraste */
     .text-shadow-subtle {
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
@@ -63,32 +62,59 @@
 <body class="bg-gray-900 text-gray-100 font-inter">
 
 <!-- Hero Section with Integrated Search -->
-<header class="parallax relative min-h-[40vh] sm:min-h-[70vh] flex items-start justify-center text-center text-white" style="background-image: url('https://cdn.jsdelivr.net/gh/Ubicasa25/img/banner.webp'); background-size: cover; background-position: center;">
-  <div class="absolute inset-0 bg-black opacity-60"></div>
-  <div class="relative z-10 animate-fade-in px-4 sm:px-6 w-full max-w-6xl pt-2 sm:pt-12">
-    <h1 class="flex items-center justify-center text-white drop-shadow-md font-[Baloo_2]">
-      <img src="https://cdn.jsdelivr.net/gh/Ubicasa25/img/logo-ubicasa.webp" alt="Ubicasa" class="h-24 sm:h-32 md:h-40 lg:h-52 xl:h-64 mx-auto" />
-    </h1>
- <!-- Slogan -->
+<header 
+  class="parallax relative min-h-[40vh] sm:min-h-[70vh] flex items-start justify-center text-center text-white" 
+  style="background-image: url('https://cdn.jsdelivr.net/gh/Ubicasa25/img/banner.webp'); background-size: cover; background-position: center;" 
+  aria-label="Sección principal con búsqueda de propiedades"
+>
+  <div class="absolute inset-0 bg-black opacity-60" aria-hidden="true"></div>
+  <div class="relative z-10 animate-fade-in px-4 sm:px-6 w-full max-w-6xl pt-4 sm:pt-12">
+    
+    <!-- Logo -->
+    <div class="flex justify-center">
+      <img 
+        src="https://cdn.jsdelivr.net/gh/Ubicasa25/img/logo-ubicasa.webp" 
+        alt="Logo de Ubicasa" 
+        class="h-24 sm:h-32 md:h-40 lg:h-52 xl:h-64 drop-shadow-md" 
+        loading="lazy" 
+      />
+    </div>
+    
+    <!-- Slogan -->
     <p class="mt-6 sm:mt-8 text-base sm:text-xl font-montserrat font-semibold text-white opacity-90 text-center text-shadow-subtle">
       Encontrá tu propiedad ideal
     </p>
-    <!-- Integrated Search Bar (Wider) -->
-    <div class="mt-4 sm:mt-8 bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-4xl sm:max-w-5xl mx-auto">
-      <div class="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 md:grid-cols-4">
-        <input id="searchInput" type="text"
-          placeholder="Buscar..."
-          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat" />
+    
+    <!-- Integrated Search Bar -->
+    <div class="mt-4 sm:mt-8 bg-white bg-opacity-10 backdrop-blur-lg p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-5xl mx-auto">
+      <form class="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 md:grid-cols-4" role="search" aria-label="Buscador de propiedades">
         
-        <select id="operationFilter"
-          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat">
+        <input 
+          id="searchInput" 
+          name="buscar" 
+          type="text" 
+          placeholder="Buscar propiedades" 
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat" 
+          aria-label="Buscar propiedad"
+        />
+        
+        <select 
+          id="operationFilter" 
+          name="operación" 
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat"
+          aria-label="Tipo de operación"
+        >
           <option value="">¿Qué estás buscando?</option>
           <option value="alquilar">Quiero alquilar</option>
           <option value="comprar">Quiero comprar</option>        
         </select>
 
-        <select id="typeFilter"
-          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat">
+        <select 
+          id="typeFilter" 
+          name="tipo" 
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat"
+          aria-label="Tipo de propiedad"
+        >
           <option value="">Tipo de propiedad</option>
           <option value="casa">Casa</option>
           <option value="departamento">Departamento</option>
@@ -98,44 +124,69 @@
           <option value="campo">Campo</option>
         </select>
 
-        <select id="sortPrice"
-          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat">
+        <select 
+          id="sortPrice" 
+          name="ordenar" 
+          class="border border-gray-500 bg-gray-800 text-white p-2 sm:p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-sm sm:text-base font-montserrat"
+          aria-label="Ordenar por precio"
+        >
           <option value="">Ordenar resultados</option>
           <option value="asc">De menor a mayor precio</option>
           <option value="desc">De mayor a menor precio</option>
         </select>
-      </div>
+
+      </form>
     </div>
 
-    <div class="mt-4 sm:mt-6 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
-      <a href="#featuredProperties" class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-3 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:from-indigo-700 hover:to-purple-800 transition duration-300 font-montserrat">
+    <!-- Call to Action Buttons -->
+    <div class="mt-6 sm:mt-12 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+      <a 
+        href="#featuredSection" 
+        class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-3 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:from-indigo-700 hover:to-purple-800 transition duration-300 font-montserrat"
+        aria-label="Explorar propiedades destacadas"
+      >
         Explorar propiedades
       </a>
-      <a href="https://wa.me/+543644539325?text=Hola,%20quiero%20publicar%20una%20propiedad%20en%20Ubicasa" target="_blank" class="bg-green-500 text-white px-3 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-green-600 transition duration-200 font-montserrat">
+      <a 
+        href="https://wa.me/+543644539325?text=Hola,%20quiero%20publicar%20una%20propiedad%20en%20Ubicasa" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="bg-green-500 text-white px-3 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-green-600 transition duration-200 font-montserrat"
+        aria-label="Publicar una propiedad en WhatsApp"
+      >
         Publicar ahora
       </a>
     </div>
 
-   
   </div>
 </header>
 
-<!-- Propiedades Destacadas -->
-<section class="py-12 px-4 bg-gray-900">
+<!-- Contenedor principal de resultados -->
+<!-- Contenedor principal de resultados -->
+<main class="py-12 px-4">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center mb-8 animate-fade-in text-white text-shadow-subtle">Propiedades destacadas</h2>
-    <div id="featuredProperties" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+    <!-- Título de resultados de búsqueda (oculto inicialmente) -->
+    <div id="searchResultsHeader" class="hidden mb-8">
+      <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center text-white text-shadow-subtle">Resultados de la búsqueda</h2>
+    </div>
+    
+    <!-- Contenedor de resultados de búsqueda (oculto inicialmente) -->
+    <div id="propertiesContainer" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 hidden"></div>
+    
+    <!-- Sección de destacados (siempre visible cuando no hay búsqueda) -->
+    <div id="featuredSection">
+      <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center mb-8 text-white text-shadow-subtle">Propiedades destacadas</h2>
+      <div id="featuredProperties" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+    </div>
+    
+    <!-- Sección de todas las propiedades (siempre visible cuando no hay búsqueda) -->
+    <div id="allPropertiesSection" class="mt-16">
+      <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center mb-8 text-white text-shadow-subtle">Explorá todas las propiedades</h2>
+      <div id="allProperties" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+    </div>
   </div>
-</section>
-
-<!-- Todas las Propiedades -->
-<section class="py-12 px-4 bg-gray-800">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-2xl sm:text-4xl font-montserrat font-semibold text-center mb-8 animate-fade-in text-white text-shadow-subtle">Explorá todas las propiedades</h2>
-    <div id="propertiesContainer" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
-  </div>
-</section>
-
+</main>
+<!-- Modal de propiedad -->
 <div id="propertyModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-50">
   <div class="bg-gray-900 text-white rounded-2xl p-6 w-full max-w-lg sm:max-w-2xl md:max-w-3xl max-h-[90vh] overflow-y-auto modal-content relative">
     <button onclick="closePropertyModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">×</button>
