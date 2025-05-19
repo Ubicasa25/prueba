@@ -141,17 +141,22 @@ const properties = [
 
 let currentImageIndex = 0;
 
-function renderProperties(filteredProperties, containerId, isFeatured = false) {
+function renderProperties(filteredProperties, containerId, showFeaturedBadge = false) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
+  
+  if (filteredProperties.length === 0) {
+    container.innerHTML = '<p class="text-white col-span-3 text-center py-10">No se encontraron propiedades que coincidan con tu búsqueda.</p>';
+    return;
+  }
+
   filteredProperties.forEach(property => {
-    if (isFeatured && !property.featured) return;
     const card = document.createElement('div');
     card.className = 'bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition duration-300';
     card.innerHTML = `
       <div class="relative overflow-hidden">
         <img src="${property.images[0]}" alt="${property.title}" class="w-full h-48 sm:h-64 object-cover transition duration-500" loading="lazy">
-        ${property.featured ? '<span class="absolute top-4 left-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Destacado</span>' : ''}
+        ${showFeaturedBadge && property.featured ? '<span class="absolute top-4 left-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">Destacado</span>' : ''}
       </div>
       <div class="p-4 sm:p-6">
         <h4 class="text-xl sm:text-2xl font-playfair font-semibold text-white">${property.title}</h4>
@@ -171,7 +176,9 @@ function filterProperties() {
   const sortPrice = document.getElementById('sortPrice').value;
 
   let filtered = properties.filter(property => {
-    const matchesText = property.title.toLowerCase().includes(searchText) || property.location.toLowerCase().includes(searchText);
+    const matchesText = property.title.toLowerCase().includes(searchText) || 
+                       property.location.toLowerCase().includes(searchText) ||
+                       property.description.toLowerCase().includes(searchText);
     const matchesOperation = !operation || property.operation === operation;
     const matchesType = !type || property.type === type;
     return matchesText && matchesOperation && matchesType;
@@ -181,8 +188,41 @@ function filterProperties() {
     filtered.sort((a, b) => sortPrice === 'asc' ? a.price - b.price : b.price - a.price);
   }
 
-  renderProperties(filtered, 'propertiesContainer');
-  renderProperties(filtered.filter(p => p.featured), 'featuredProperties', true);
+  const resultsHeader = document.getElementById('searchResultsHeader');
+  const featuredSection = document.getElementById('featuredSection');
+  const allPropertiesSection = document.getElementById('allPropertiesSection');
+  const propertiesContainer = document.getElementById('propertiesContainer');
+  
+  const hasSearch = searchText || operation || type || sortPrice;
+  
+  if (hasSearch) {
+    // Modo búsqueda: mostrar solo resultados filtrados (con badges)
+    resultsHeader.classList.remove('hidden');
+    featuredSection.classList.add('hidden');
+    allPropertiesSection.classList.add('hidden');
+    propertiesContainer.classList.remove('hidden');
+    renderProperties(filtered, 'propertiesContainer', true);
+  } else {
+    // Modo normal: mostrar secciones separadas
+    resultsHeader.classList.add('hidden');
+    featuredSection.classList.remove('hidden');
+    allPropertiesSection.classList.remove('hidden');
+    propertiesContainer.classList.add('hidden');
+    
+    // Destacados (con badge)
+    renderProperties(
+      properties.filter(p => p.featured), 
+      'featuredProperties',
+      true
+    );
+    
+    // No destacados (sin badge)
+    renderProperties(
+      properties.filter(p => !p.featured), 
+      'allProperties',
+      false
+    );
+  }
 }
 
 function populateThumbnails(images) {
@@ -254,11 +294,11 @@ function nextImage() {
   updateImageCarousel(property.images);
 }
 
-// Event listeners para los filtros
+// Event listeners
 document.getElementById('searchInput').addEventListener('input', filterProperties);
 document.getElementById('operationFilter').addEventListener('change', filterProperties);
 document.getElementById('typeFilter').addEventListener('change', filterProperties);
 document.getElementById('sortPrice').addEventListener('change', filterProperties);
 
-// Render inicial
-filterProperties();
+// Inicialización
+document.addEventListener('DOMContentLoaded', filterProperties);
